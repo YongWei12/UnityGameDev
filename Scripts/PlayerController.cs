@@ -4,15 +4,7 @@ using UnityEngine;
 
 public class PlayerController : Shape
 {
-    private GameSceneController gameSceneController;
     public ProjectileController projectilePrefab;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        gameSceneController = FindObjectOfType<GameSceneController>();
-        SetColor(Color.cyan);
-    }
 
     // Update is called once per frame
     void Update()
@@ -35,7 +27,13 @@ public class PlayerController : Shape
             horizontalMovement = horizontalMovement * Time.deltaTime * gameSceneController.playerSpeed;
             horizontalMovement += transform.position.x;
 
-            transform.position = new Vector2(horizontalMovement, transform.position.y);
+            float right = gameSceneController.screenBounds.x - halfWidth;
+            float left = -right;
+
+            float limit =
+                Mathf.Clamp(horizontalMovement, left, right);
+
+            transform.position = new Vector2(limit, transform.position.y);
         }
     }
 

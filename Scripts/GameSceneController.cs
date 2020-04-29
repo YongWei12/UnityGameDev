@@ -43,4 +43,10 @@ public class GameSceneController : MonoBehaviour
             yield return wait;
         }
     }
+
+    public void KillObject(IKillable killable)
+    {
+        Debug.LogWarningFormat("{0} killed by GameSceneController", killable.GetName());
+        killable.Kill();
+    }
 }
