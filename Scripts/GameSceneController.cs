@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public delegate void TextOutputHandler(string Text);
 public class GameSceneController : MonoBehaviour
 {
     public float playerSpeed;
@@ -46,7 +48,12 @@ public class GameSceneController : MonoBehaviour
 
     public void KillObject(IKillable killable)
     {
-        Debug.LogWarningFormat("{0} killed by GameSceneController", killable.GetName());
+        //Debug.LogWarningFormat("{0} killed by GameSceneController", killable.GetName());
         killable.Kill();
+    }
+
+    public void OutputText(string output)
+    {
+        Debug.LogFormat("{0} output by GameSceneController", output);
     }
 }

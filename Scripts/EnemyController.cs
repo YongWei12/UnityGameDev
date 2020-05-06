@@ -11,22 +11,23 @@ public class EnemyController : Shape, IKillable
 
         SetColor(Color.red);
         Name = "Enemy";
-        Debug.Log("Enemy Spawned");
+        //Debug.Log("Enemy Spawned");
     }
 
     // Update is called once per frame
     void Update()
     {
-        MoveEnemy();
+        MoveEnemy(gameSceneController.OutputText);
     }
 
-    private void MoveEnemy()
+    private void MoveEnemy(TextOutputHandler outputHandler)
     {
         transform.Translate(Vector2.down * Time.deltaTime, Space.World);
 
         float bottom = transform.position.y - halfHeight;
         if(bottom <= -gameSceneController.screenBounds.y)
         {
+            outputHandler("Enemy at bottom");
             gameSceneController.KillObject(this);
         }
     }
